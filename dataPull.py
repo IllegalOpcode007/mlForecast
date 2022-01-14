@@ -90,6 +90,7 @@ def getYfinData(tickerLst, dateFilt):
         data['symbol'] = ticker
         data['load_date'] = today = date.today()
         data.rename(columns={'Date': 'date', 'Open': 'open', 'Low': 'low', 'High': 'high', 'Close': 'close', 'Volume': 'volume', 'Dividends': 'dividends', 'Stock Splits': 'stock_splits'}, inplace=True)
+        data['date'] = pd.to_datetime(data['date'], format = '%Y-%m-%d', errors = 'coerce') # Error in dates --> NaT. 
         data.dropna(inplace = True)
         data.reset_index(inplace=True, drop = True)
         # Filter Data
